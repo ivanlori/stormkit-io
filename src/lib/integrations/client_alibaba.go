@@ -49,7 +49,7 @@ func Alibaba(args ClientArgs) (*AlibabaClient, error) {
 		args.SecretKey = utils.GetString(conf.Runner.SecretKey, conf.Alibaba.SecretKey)
 	}
 
-	customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
+	customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...any) (aws.Endpoint, error) {
 		return aws.Endpoint{
 			PartitionID:   "oss",
 			URL:           fmt.Sprintf("https://oss-%s.aliyuncs.com", conf.Alibaba.Region),
