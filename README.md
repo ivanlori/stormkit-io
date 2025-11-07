@@ -38,6 +38,8 @@ To run Stormkit locally for development purposes:
 - PostgreSQL 17+
 - Redis 7+
 
+You can install `go` and `node` using [mise](https://mise.jdx.dev/), which is a polyglot tool version manager.
+
 ### Local DNS
 
 If you are using a MacOS, running the following script will set up a dns mask on your local environment
@@ -49,7 +51,8 @@ so that you can access stormkit through `http://stormkit` domain.
 
 ### Update environment variables
 
-Copy [.env.example](./.env.example) and create an `.env` file. Provide the missing variables.
+- Copy [.env.example](./.env.example) and create an `.env` file. Provide the missing variables.
+- Generate a 32 random token and set the `STORMKIT_APP_SECRET` environment variable.
 
 ### Running the services
 
@@ -57,6 +60,9 @@ Copy [.env.example](./.env.example) and create an `.env` file. Provide the missi
 # Clone the repository
 git clone https://github.com/stormkit-io/stormkit-io.git
 cd stormkit-io
+
+# Trust the dependencies specified in `mise.toml` and install them
+mise trust && mise install
 
 # Start all services (includes database setup and migrations)
 ./scripts/start.sh
