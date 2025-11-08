@@ -23,8 +23,6 @@ type RedisCache struct {
 
 var Cache *redis.Client
 
-const ListenerChannel = "redis-listener"
-
 func newClient() (*redis.Client, error) {
 	client := redis.NewClient(&redis.Options{
 		Addr: config.Get().RedisAddr,
