@@ -45,6 +45,15 @@ You can install `go` and `node` using [mise](https://mise.jdx.dev/), which is a 
 - Copy [.env.example](./.env.example) and create an `.env` file. Provide the missing variables.
 - Generate a 32 random token and set the `STORMKIT_APP_SECRET` environment variable.
 
+### Configure hosts file
+
+For local development, you need to add the API hostname to your `/etc/hosts` file so that Node.js can resolve it:
+
+```bash
+# Add api.localhost to your hosts file
+echo "127.0.0.1       api.localhost" | sudo tee -a /etc/hosts
+```
+
 ### Running the services
 
 ```bash
