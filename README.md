@@ -45,15 +45,6 @@ You can install `go` and `node` using [mise](https://mise.jdx.dev/), which is a 
 - Copy [.env.example](./.env.example) and create an `.env` file. Provide the missing variables.
 - Generate a 32 random token and set the `STORMKIT_APP_SECRET` environment variable.
 
-### Configure hosts file
-
-You need to add the API hostname to your `/etc/hosts` file so that Node.js can resolve it:
-
-```bash
-# Add api.localhost to your hosts file
-echo "127.0.0.1       api.localhost" | sudo tee -a /etc/hosts
-```
-
 ### Running the services
 
 ```bash
@@ -181,4 +172,23 @@ pkg-config --modversion vips
 # Restart services
 ./scripts/start.sh
 ```
+
+### API endpoints return 500 errors - `/api/auth/providers` and `/api/instance`
+
+**Problem:** When accessing the application at `https://localhost:5400`, the auth page may fail to load properly and you may see 500 Internal Server Error responses on API endpoints like `/api/auth/providers` and `/api/instance` in the browser's Network tab.
+
+**Solution:**
+
+```bash
+# Add api.localhost to your hosts file
+echo "127.0.0.1       api.localhost" | sudo tee -a /etc/hosts
+
+# Verify it resolves correctly
+ping -c 1 api.localhost
+
+# Restart the services
+./scripts/start.sh
+```
+
+After applying this fix, the API proxy will work correctly and the endpoints will return proper responses.
 
